@@ -2,6 +2,7 @@ import Counter from "./components/Counter";
 function App() {
   return (
     <>
+      <h1>sdsd</h1>
       <Counter />
     </>
   );
