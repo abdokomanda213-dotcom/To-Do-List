@@ -23,6 +23,7 @@ function Counter() {
   };
   return (
     <>
+    <h1>abdo</h1>
       <h1 className="count-display ">{count}</h1>
       <Buttons onAction={countHandl} />
     </>
