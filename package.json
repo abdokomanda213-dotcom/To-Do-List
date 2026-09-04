@@ -1,9 +1,11 @@
 {
   "name": "vite-project",
   "private": true,
+  "homepage": "https://abdokomanda213-dotcom.github.io/creat",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -21,6 +23,7 @@
     "eslint": "^10.9.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.4",
+    "gh-pages": "^6.3.0",
     "globals": "^17.11.0",
     "vite": "^8.2.2"
   }
