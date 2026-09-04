@@ -1,0 +1,69 @@
+/* الحاوية الرئيسية للأزرار */
+.button-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  max-width: fit-content;
+  margin: 20px auto;
+}
+
+/* التنسيق الأساسي لكل الأزرار */
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: #ffffff;
+  outline: none;
+}
+
+/* تأثير التكبير عند الوقوف بالماوس */
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* تأثير الضغط */
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* زر الزيادة - أخضر */
+.btn-increment {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.btn-increment:hover {
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+}
+
+/* زر النقصان - أحمر */
+.btn-decrement {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.btn-decrement:hover {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* زر إعادة الضبط - رمادي / أزرق داكن */
+.btn-reset {
+  background: linear-gradient(135deg, #64748b, #475569);
+}
+
+.btn-reset:hover {
+  box-shadow: 0 6px 20px rgba(100, 116, 139, 0.4);
+}

@@ -1,0 +1,12 @@
+.count-display {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #2563eb; /* لون أزرق عصري */
+  text-align: center;
+  margin-top: 20px;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  text-shadow: 0px 4px 10px rgba(37, 99, 235, 0.2); /* ظل خفيف بيدي عمق */
+}
