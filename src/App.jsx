@@ -1,11 +1,10 @@
-import Counter from "./components/Counter";
+import MainTodo from "./components/MainTodo";
 function App() {
   return (
     <>
-      <h1>sdsd</h1>
-      <Counter />
+      <h1>قائمة المهام</h1>
+      <MainTodo />
     </>
   );
 }
-
 export default App;
