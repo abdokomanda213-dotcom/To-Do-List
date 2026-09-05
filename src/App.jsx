@@ -1,10 +1,12 @@
 import MainTodo from "./components/MainTodo";
+
 function App() {
   return (
-    <>
-      <h1>قائمة المهام</h1>
+    <div className="app-card">
+      <h1 className="app-title">قائمة المهام</h1>
       <MainTodo />
-    </>
+    </div>
   );
 }
+
 export default App;

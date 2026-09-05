@@ -1,197 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&family=Tajawal:wght@400;500;700&display=swap');
+
+:root {
+  --page-bg: #171D18;
+  --card-bg: #212B22;
+  --ink: #EDE9DC;
+  --ink-soft: #93A192;
+  --line: #3A463A;
+  --accent: #D9A544;
+  --accent-ink: #F0C46D;
+  --danger: #C9785F;
+  --danger-ink: #E0987D;
+  --radius-card: 18px;
+  --radius-pill: 999px;
+}
+
 * {
   box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  background: var(--page-bg);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(237, 233, 220, 0.05) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: 'Tajawal', 'Segoe UI', sans-serif;
 }
 
-body {
-  background-color: #0f172a;
-  color: #f8fafc;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  direction: rtl;
+#root {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 1rem;
+  justify-content: center;
+  padding: 32px 16px;
 }
 
-/* الكارت الرئيسي - متجاوب مع كل الشاشات */
 .app-card {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  direction: rtl;
   width: 100%;
   max-width: 480px;
-  padding: 1.5rem;
-  border-radius: 20px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  padding: 36px 32px 32px 24px;
+  position: relative;
+  border: 1px solid var(--line);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
 }
 
-/* الـ Form لتنظيم المدخلات */
+/* notebook margin rule, sits on the right edge for RTL reading */
+.app-card::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  right: 12px;
+  width: 2px;
+  background: var(--danger);
+  opacity: 0.35;
+  border-radius: 2px;
+}
+
+.app-title {
+  font-family: 'Reem Kufi', 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 5vw, 2.1rem);
+  margin: 0 0 24px;
+  padding-right: 22px;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+}
+
 .form-container {
   display: flex;
+  align-items: stretch;
   gap: 10px;
-  width: 100%;
+  margin: 0 0 26px;
+  padding-right: 22px;
 }
 
 .todo-input {
   flex: 1;
-  min-width: 0; /* منع خروج النص عن الحاوية في الموبايل */
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid #334155;
-  color: #fff;
-  padding: 12px 14px;
-  border-radius: 12px;
-  outline: none;
-  font-size: 15px;
-  transition: border-color 0.2s ease;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--line);
+  border-radius: 6px 6px 0 0;
+  padding: 10px 8px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.todo-input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.7;
 }
 
 .todo-input:focus {
-  border-color: #6366f1;
+  outline: none;
+  border-bottom-color: var(--accent);
+  background-color: rgba(217, 165, 68, 0.08);
 }
 
 .add-btn {
-  background: #6366f1;
-  color: white;
+  flex-shrink: 0;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1B1405;
+  background: var(--accent);
   border: none;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-weight: 600;
+  border-radius: var(--radius-pill);
+  padding: 0 22px;
   cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.2s ease;
+  transition: transform 0.12s ease, background 0.15s ease;
 }
 
 .add-btn:hover {
-  background: #4f46e5;
+  background: var(--accent-ink);
 }
 
-/* قائمة المهام */
+.add-btn:active {
+  transform: scale(0.96);
+}
+
+.add-btn:focus-visible,
+.btn-done:focus-visible,
+.btn-delete:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+.todo-input:focus-visible {
+  outline: none;
+  border-bottom-color: var(--accent);
+  box-shadow: 0 2px 0 0 var(--accent);
+}
+
 .todo-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  max-height: 60vh;
-  overflow-y: auto;
-  padding-left: 4px; /* تحسين الـ Scrollbar */
-}
-
-/* كل عنصر مهمة */
-.todo-item {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 12px 14px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  word-break: break-word;
-}
-
-.todo-text {
-  color: #f8fafc;
-  font-size: 15px;
-  margin: 0;
-  flex: 1;
-  text-align: right;
-  line-height: 1.4;
-}
-
-.button-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0; /* عدم انكماش الأزرار عند كتابة نص طويل */
-}
-
-.btn-done,
-.btn-delete {
-  border: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  transition: transform 0.1s ease, background 0.2s ease;
-}
-
-.btn-done:active,
-.btn-delete:active {
-  transform: scale(0.95);
-}
-
-.btn-done {
-  background: rgba(34, 197, 94, 0.2);
-  color: #4ade80;
-}
-
-.btn-done:hover {
-  background: #22c55e;
-  color: white;
-}
-
-.btn-delete {
-  background: rgba(239, 68, 68, 0.2);
-  color: #f87171;
-}
-
-.btn-delete:hover {
-  background: #ef4444;
-  color: white;
+  padding-right: 22px;
 }
 
 .empty-msg {
   text-align: center;
-  color: #94a3b8;
-  font-size: 14px;
-  padding: 10px 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  padding: 28px 0;
+  margin: 0;
 }
 
-/* Breakpoints للموبايل الشاشات الصغيرة */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+  animation: item-in 0.18s ease-out;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+@keyframes item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-text {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ink);
+  word-break: break-word;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-done,
+.btn-delete {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease;
+}
+
+.btn-done:hover {
+  border-color: var(--accent);
+  background: rgba(217, 165, 68, 0.18);
+}
+
+.btn-delete:hover {
+  border-color: var(--danger);
+  background: rgba(201, 120, 95, 0.18);
+}
+
+.btn-done:active,
+.btn-delete:active {
+  transform: scale(0.9);
+}
+
+/* responsive tuning */
 @media (max-width: 480px) {
-  body {
-    padding: 0.75rem;
-  }
-
   .app-card {
-    padding: 1rem;
-    border-radius: 16px;
+    padding: 28px 22px 24px 18px;
+    border-radius: 14px;
   }
 
-  .todo-input {
-    padding: 10px 12px;
-    font-size: 14px;
+  .app-title,
+  .form-container,
+  .todo-list {
+    padding-right: 16px;
   }
 
   .add-btn {
-    padding: 10px 14px;
-    font-size: 14px;
-  }
-
-  .todo-item {
-    padding: 10px;
-    gap: 8px;
-  }
-
-  .todo-text {
-    font-size: 14px;
+    padding: 0 16px;
+    font-size: 0.9rem;
   }
 
   .btn-done,
   .btn-delete {
-    width: 32px;
-    height: 32px;
-    font-size: 13px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .form-container {
+    flex-direction: column;
+  }
+
+  .add-btn {
+    padding: 10px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .todo-item {
+    animation: none;
+  }
+  .add-btn,
+  .btn-done,
+  .btn-delete {
+    transition: none;
   }
 }
